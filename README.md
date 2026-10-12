@@ -50,7 +50,7 @@ Add a screenshot, GIF, or screen recording of your JavaFX app here:
 ![Theme Hot-Swap Demo](assets/demo.png)
 ```
 
-If you want, you can replace the example above with your real screenshot later.
+If you want, replace the example above with your real screenshot later.
 
 ---
 
@@ -239,10 +239,9 @@ If you want to add a formal license later, you can choose MIT or Apache 2.0.
 
 Theme Hot-Swap is a simple but powerful idea: make UI design flexible, fast, and flexible enough to update instantly. If you are building a JavaFX application and want a polished theme system, this project is a great starting point.
 
-If you want, I can next turn this into a more premium README with:
+If you want to make this README even more premium, I can also add:
 
 - a custom banner image
-- better badge design
-- a real project screenshot section
-- a fully polished "About the project" and "How it works" layout
-- a version specifically styled for GitHub profile presentation
+- a full feature comparison table
+- a screenshot gallery section
+- a stronger landing page style layout for GitHub
