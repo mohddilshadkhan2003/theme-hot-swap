@@ -1,0 +1,51 @@
+.root {
+    -fx-base: #ffffff;
+    -fx-background: #f6f7f9;
+    -fx-accent: #2f6fed;
+    -fx-text-base-color: #1b2430;
+    -fx-control-inner-background: #ffffff;
+}
+
+.app-root {
+    -fx-background-color: #f6f7f9;
+    -fx-text-fill: #1b2430;
+}
+
+.titlebar {
+    -fx-background-color: #eceff3;
+    -fx-border-color: transparent transparent #d9dee5 transparent;
+}
+
+.sidebar {
+    -fx-background-color: #eceff3;
+    -fx-border-color: transparent #d9dee5 transparent transparent;
+}
+
+.nav-item {
+    -fx-text-fill: #64707f;
+}
+
+.nav-item.active {
+    -fx-background-color: #2f6fed;
+    -fx-text-fill: white;
+}
+
+.stat-card {
+    -fx-background-color: #ffffff;
+    -fx-border-color: #d9dee5;
+}
+
+.primary-button {
+    -fx-background-color: #2f6fed;
+    -fx-text-fill: white;
+}
+
+.toggle-button {
+    -fx-background-color: #edf1f6;
+    -fx-text-fill: #1b2430;
+}
+
+.toggle-button:selected {
+    -fx-background-color: #2f6fed;
+    -fx-text-fill: white;
+}

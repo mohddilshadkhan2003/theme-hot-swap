@@ -1,0 +1,129 @@
+# Theme Hot-Swap
+
+A JavaFX demo project that changes theme styles live without restarting the app. It keeps the same scene and state while the stylesheet is updated in real time.
+
+## What this project does
+
+This project demonstrates a real-world UI pattern used in dashboards and monitoring tools:
+
+- same window stays open
+- same JVM stays alive
+- same app state remains intact
+- stylesheet changes instantly
+
+You can switch between four themes and watch the build counter continue running while the UI updates.
+
+## Features
+
+- 4 built-in themes: Daylight, Midnight, Dark Roast, and Terminal
+- live CSS swapping without app restart
+- keyboard shortcuts from `1` to `4`
+- auto-cycle mode every 2.2 seconds
+- run-build button that increments a counter
+- clean JavaFX + Maven setup for JDK 21
+
+## Requirements
+
+Before running the project, make sure you have:
+
+- JDK 21
+- Maven 3.9+
+
+Check your environment:
+
+```bash
+java -version
+mvn -version
+```
+
+## Run the project
+
+1. Open a terminal in the project folder.
+2. Run:
+
+```bash
+mvn clean install
+```
+
+3. Then start the app:
+
+```bash
+mvn javafx:run
+```
+
+## Controls
+
+- `1` → Daylight
+- `2` → Midnight
+- `3` → Dark Roast
+- `4` → Terminal
+- `Space` → toggle auto-cycle
+- Click `Run build` to increase the build counter
+
+## Why theme hot-swap works
+
+The app keeps a single `Scene` and replaces the active stylesheet list:
+
+```java
+scene.getStylesheets().setAll(
+    getClass().getResource("/css/themes/midnight.css").toExternalForm(),
+    getClass().getResource("/css/app.css").toExternalForm()
+);
+```
+
+Because the scene stays alive, the UI refreshes immediately without restarting the application.
+
+## Project structure
+
+```text
+theme-hot-swap/
+├── pom.xml
+├── README.md
+├── .gitignore
+├── src/
+│   └── main/
+│       ├── java/
+│       │   └── com/example/themehotswap/
+│       │       ├── BuildBoardApp.java
+│       │       ├── ThemeManager.java
+│       │       └── ThemePreset.java
+│       └── resources/
+│           └── css/
+│               ├── app.css
+│               └── themes/
+│                   ├── daylight.css
+│                   ├── midnight.css
+│                   ├── roast.css
+│                   └── terminal.css
+```
+
+## Build for packaging
+
+```bash
+mvn clean package
+```
+
+## Troubleshooting
+
+### Java not found
+Install JDK 21 and make sure it is active in your terminal.
+
+### Maven not found
+Install Maven and add it to your PATH.
+
+### App does not start
+Run:
+
+```bash
+mvn clean install
+```
+
+Then try:
+
+```bash
+mvn javafx:run
+```
+
+## Summary
+
+This project is a simple and practical example of runtime theme switching in JavaFX. It helps you understand how to build a dashboard-style application where UI themes can be changed live while the app keeps working.

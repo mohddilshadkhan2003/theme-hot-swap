@@ -1,0 +1,265 @@
+package com.example.themehotswap;
+
+import javafx.application.Application;
+import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.ToggleButton;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
+import javafx.stage.Stage;
+
+import java.util.List;
+
+public class BuildBoardApp extends Application {
+    private ThemeManager themeManager;
+    private final IntegerProperty buildCount = new SimpleIntegerProperty(0);
+    private final ToggleButton autoCycleButton = new ToggleButton("Auto-cycle");
+
+    @Override
+    public void start(Stage primaryStage) {
+        BorderPane root = new BorderPane();
+        root.getStyleClass().add("app-root");
+
+        HBox titleBar = buildTitleBar();
+        VBox sidebar = buildSidebar();
+        VBox content = buildMainContent();
+
+        root.setTop(titleBar);
+        root.setLeft(sidebar);
+        root.setCenter(content);
+
+        Scene scene = new Scene(root, 1100, 760);
+        themeManager = new ThemeManager(scene);
+        bindKeyShortcuts(scene);
+
+        primaryStage.setTitle("BuildBoard");
+        primaryStage.setScene(scene);
+        primaryStage.setMinWidth(900);
+        primaryStage.setMinHeight(600);
+        primaryStage.show();
+    }
+
+    private HBox buildTitleBar() {
+        HBox bar = new HBox(12);
+        bar.getStyleClass().add("titlebar");
+        bar.setPadding(new Insets(10, 14, 10, 14));
+        bar.setAlignment(Pos.CENTER_LEFT);
+
+        HBox dots = new HBox(8);
+        dots.setAlignment(Pos.CENTER_LEFT);
+        for (int i = 0; i < 3; i++) {
+            Circle dot = new Circle(5);
+            dot.getStyleClass().add("traffic-dot");
+            if (i == 0) {
+                dot.setStyle("-fx-fill: #ff5f57;");
+            } else if (i == 1) {
+                dot.setStyle("-fx-fill: #febc2e;");
+            } else {
+                dot.setStyle("-fx-fill: #28c840;");
+            }
+            dots.getChildren().add(dot);
+        }
+
+        Label appName = new Label("BuildBoard");
+        appName.getStyleClass().add("app-name");
+
+        Region spacer = new Region();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
+
+        Label jdkLabel = new Label("JDK 21 · Maven 3.9");
+        jdkLabel.getStyleClass().add("jdk-label");
+
+        bar.getChildren().addAll(dots, appName, spacer, jdkLabel);
+        return bar;
+    }
+
+    private VBox buildSidebar() {
+        VBox sidebar = new VBox(6);
+        sidebar.getStyleClass().add("sidebar");
+        sidebar.setPadding(new Insets(12, 8, 12, 8));
+        sidebar.setPrefWidth(150);
+
+        List<String> items = List.of("Modules", "Builds", "Coverage", "Settings");
+        for (String item : items) {
+            Label label = new Label(item);
+            label.getStyleClass().add("nav-item");
+            if (item.equals("Modules")) {
+                label.getStyleClass().add("active");
+            }
+            sidebar.getChildren().add(label);
+        }
+        return sidebar;
+    }
+
+    private VBox buildMainContent() {
+        VBox content = new VBox(18);
+        content.setPadding(new Insets(20, 20, 20, 20));
+
+        Label heading = new Label("Module health");
+        heading.getStyleClass().add("heading");
+
+        HBox stats = new HBox(12);
+        stats.getChildren().addAll(
+                createStatCard("Heap", "412", "/ 1024 MB", true),
+                createStatCard("Tests", "1,284", "passed", false),
+                createStatCard("Last build", "38.2", "s", false)
+        );
+
+        TableView<ModuleRow> table = createTable();
+        table.setPrefHeight(220);
+
+        HBox actions = new HBox(16);
+        actions.setAlignment(Pos.CENTER_LEFT);
+
+        Button runBuildButton = new Button("Run build");
+        runBuildButton.getStyleClass().add("primary-button");
+        runBuildButton.setOnAction(event -> runBuild());
+
+        Label buildsLabel = new Label("Builds this session:");
+        buildsLabel.getStyleClass().add("meta-label");
+
+        Label buildCountLabel = new Label("0");
+        buildCountLabel.textProperty().bind(buildCount.asString());
+        buildCountLabel.getStyleClass().add("build-count");
+
+        autoCycleButton.setOnAction(event -> toggleAutoCycle());
+
+        actions.getChildren().addAll(runBuildButton, buildsLabel, buildCountLabel, autoCycleButton);
+
+        content.getChildren().addAll(heading, stats, table, actions);
+        return content;
+    }
+
+    private VBox createStatCard(String title, String value, String suffix, boolean withProgress) {
+        VBox card = new VBox(8);
+        card.getStyleClass().add("stat-card");
+        card.setMinWidth(150);
+
+        Label titleLabel = new Label(title);
+        titleLabel.getStyleClass().add("stat-title");
+
+        Label valueLabel = new Label(value + " " + suffix);
+        valueLabel.getStyleClass().add("stat-value");
+
+        if (withProgress) {
+            Region progress = new Region();
+            progress.getStyleClass().add("progress-bar");
+            card.getChildren().addAll(titleLabel, valueLabel, progress);
+        } else {
+            card.getChildren().addAll(titleLabel, valueLabel);
+        }
+
+        return card;
+    }
+
+    private TableView<ModuleRow> createTable() {
+        TableView<ModuleRow> table = new TableView<>();
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+        table.getStyleClass().add("module-table");
+
+        TableColumn<ModuleRow, String> moduleCol = new TableColumn<>("Module");
+        moduleCol.setCellValueFactory(new PropertyValueFactory<>("module"));
+
+        TableColumn<ModuleRow, String> statusCol = new TableColumn<>("Status");
+        statusCol.setCellValueFactory(new PropertyValueFactory<>("status"));
+
+        TableColumn<ModuleRow, String> timeCol = new TableColumn<>("Time");
+        timeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+
+        TableColumn<ModuleRow, String> coverageCol = new TableColumn<>("Coverage");
+        coverageCol.setCellValueFactory(new PropertyValueFactory<>("coverage"));
+
+        table.getColumns().setAll(moduleCol, statusCol, timeCol, coverageCol);
+        table.getItems().setAll(
+                new ModuleRow("auth-service", "PASSED", "4,120 ms", "91.4%"),
+                new ModuleRow("billing-api", "RUNNING", "9,860 ms", "84.0%"),
+                new ModuleRow("gateway", "PASSED", "2,305 ms", "88.7%"),
+                new ModuleRow("report-worker", "FAILED", "6,740 ms", "62.3%")
+        );
+        return table;
+    }
+
+    private void bindKeyShortcuts(Scene scene) {
+        scene.setOnKeyPressed(event -> {
+            if (event.isControlDown() || event.isMetaDown() || event.isAltDown()) {
+                return;
+            }
+
+            if (event.getCode() == KeyCode.DIGIT1) {
+                themeManager.applyThemeByIndex(0);
+            } else if (event.getCode() == KeyCode.DIGIT2) {
+                themeManager.applyThemeByIndex(1);
+            } else if (event.getCode() == KeyCode.DIGIT3) {
+                themeManager.applyThemeByIndex(2);
+            } else if (event.getCode() == KeyCode.DIGIT4) {
+                themeManager.applyThemeByIndex(3);
+            } else if (event.getCode() == KeyCode.SPACE) {
+                toggleAutoCycle();
+            }
+        });
+    }
+
+    private void runBuild() {
+        buildCount.set(buildCount.get() + 1);
+    }
+
+    private void toggleAutoCycle() {
+        if (themeManager.isAutoCycleRunning()) {
+            themeManager.stopAutoCycle();
+            autoCycleButton.setText("Auto-cycle");
+            autoCycleButton.setSelected(false);
+        } else {
+            themeManager.cycleToNext();
+            themeManager.startAutoCycle();
+            autoCycleButton.setText("Stop");
+            autoCycleButton.setSelected(true);
+        }
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+
+    public static class ModuleRow {
+        private final String module;
+        private final String status;
+        private final String time;
+        private final String coverage;
+
+        public ModuleRow(String module, String status, String time, String coverage) {
+            this.module = module;
+            this.status = status;
+            this.time = time;
+            this.coverage = coverage;
+        }
+
+        public String getModule() {
+            return module;
+        }
+
+        public String getStatus() {
+            return status;
+        }
+
+        public String getTime() {
+            return time;
+        }
+
+        public String getCoverage() {
+            return coverage;
+        }
+    }
+}

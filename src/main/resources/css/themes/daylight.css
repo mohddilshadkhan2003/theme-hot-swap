@@ -1,0 +1,122 @@
+.root {
+    -fx-base: #ffffff;
+    -fx-background: #f6f7f9;
+    -fx-accent: #2f6fed;
+    -fx-text-base-color: #1b2430;
+    -fx-control-inner-background: #ffffff;
+    -fx-focus-color: #2f6fed;
+    -fx-faint-focus-color: rgba(47, 111, 237, 0.18);
+}
+
+.app-root {
+    -fx-background-color: #f6f7f9;
+    -fx-text-fill: #1b2430;
+}
+
+.titlebar {
+    -fx-background-color: derive(-fx-base, -8%);
+    -fx-border-color: transparent transparent derive(-fx-base, -18%) transparent;
+    -fx-border-width: 0 0 1 0;
+}
+
+.app-name {
+    -fx-font-size: 15px;
+    -fx-font-weight: 700;
+}
+
+.jdk-label {
+    -fx-font-size: 12px;
+    -fx-text-fill: derive(-fx-text-base-color, 35%);
+}
+
+.sidebar {
+    -fx-background-color: derive(-fx-base, -10%);
+    -fx-border-color: transparent derive(-fx-base, -18%) transparent transparent;
+    -fx-border-width: 0 1 0 0;
+}
+
+.nav-item {
+    -fx-padding: 8 10 8 10;
+    -fx-background-radius: 6;
+    -fx-text-fill: derive(-fx-text-base-color, 35%);
+    -fx-font-size: 13px;
+}
+
+.nav-item.active {
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: white;
+    -fx-font-weight: 700;
+}
+
+.heading {
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+}
+
+.stat-card {
+    -fx-padding: 10 12 10 12;
+    -fx-background-color: derive(-fx-base, 8%);
+    -fx-border-color: derive(-fx-base, -18%);
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+    -fx-spacing: 8;
+    -fx-min-width: 150px;
+}
+
+.stat-title {
+    -fx-font-size: 11px;
+    -fx-text-fill: derive(-fx-text-base-color, 42%);
+    -fx-text-transform: uppercase;
+}
+
+.stat-value {
+    -fx-font-size: 20px;
+    -fx-font-weight: 700;
+}
+
+.progress-bar {
+    -fx-pref-height: 6;
+    -fx-background-color: derive(-fx-base, -15%);
+    -fx-background-radius: 3;
+    -fx-padding: 0;
+}
+
+.module-table {
+    -fx-background-color: derive(-fx-base, 8%);
+    -fx-border-color: derive(-fx-base, -18%);
+    -fx-border-width: 1;
+    -fx-background-radius: 8;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.primary-button {
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: white;
+    -fx-font-weight: 700;
+    -fx-background-radius: 8;
+    -fx-padding: 9 18 9 18;
+}
+
+.meta-label {
+    -fx-font-size: 13px;
+    -fx-text-fill: derive(-fx-text-base-color, 35%);
+}
+
+.build-count {
+    -fx-font-weight: 700;
+}
+
+.toggle-button {
+    -fx-background-color: derive(-fx-base, 12%);
+    -fx-text-fill: -fx-text-base-color;
+    -fx-background-radius: 8;
+    -fx-padding: 8 14 8 14;
+}
+
+.toggle-button:selected {
+    -fx-background-color: -fx-accent;
+    -fx-text-fill: white;
+}
