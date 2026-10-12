@@ -1,125 +1,124 @@
-# Theme Hot-Swap 🎨
+# Theme Hot-Swap
 
-**Dynamic theme switching for JavaFX applications without restarting!**
+<div align="center">
 
-## What is Theme Hot-Swap?
+  <img src="https://img.shields.io/badge/JavaFX-Theme%20Switcher-blue?style=for-the-badge&logo=java" alt="JavaFX Theme Switcher" />
+  <img src="https://img.shields.io/badge/Status-Active-success?style=for-the-badge" alt="Project Status" />
+  <img src="https://img.shields.io/badge/Style-CSS%20Live%20Theme-lightgrey?style=for-the-badge" alt="CSS Live Theme" />
 
-Theme Hot-Swap lets you change the look and feel of your JavaFX applications instantly—no need to restart your app. Switch between different color themes, update styles, and see the changes live with a beautiful preview dashboard.
+  <h2>Live theme switching for JavaFX apps without restart</h2>
 
-### Key Features ✨
+</div>
 
-- **Live Theme Switching** - Change themes instantly without restarting your application
-- **Hot-Reload Stylesheets** - Update CSS styles in real-time
-- **Live Preview Dashboard** - See how your themes look before applying them
-- **Easy to Use** - Simple integration with existing JavaFX projects
-- **Modern Green Theme** - Includes a sleek default dark theme with neon green accents
+Theme Hot-Swap is a lightweight JavaFX theme system that lets you change the appearance of an app instantly using CSS and live stylesheet updates. Instead of restarting the application every time you want to test a new color scheme, you can switch themes on the fly and preview the result immediately.
+
+This project is ideal for desktop applications, dashboards, admin panels, and modern UI prototypes that need a polished look and fast theme customization.
 
 ---
 
-## Getting Started 🚀
+## Why This Project Exists
 
-### What You Need
+Sometimes UI work becomes slow because every color change requires rebuilding or restarting the app. Theme Hot-Swap solves this by letting you:
 
-Before you get started, make sure you have these installed on your computer:
+- change themes instantly
+- update CSS styles in real time
+- preview different looks without restarting the app
+- keep your interface consistent and modern
+- build custom theme packs for your app
 
-1. **Java Development Kit (JDK)** - Version 11 or higher
-   - Download from: [oracle.com/java](https://www.oracle.com/java/technologies/downloads/)
+---
 
-2. **JavaFX SDK** - Version 11 or higher
-   - Download from: [gluonhq.com/products/javafx](https://gluonhq.com/products/javafx/)
+## Features
 
-3. **Git** - To clone this repository
-   - Download from: [git-scm.com](https://git-scm.com/)
+- Instant theme switching
+- Real-time CSS reload
+- JavaFX-friendly styling
+- Clean dark UI theme examples
+- Easy customization for custom branding
+- Smooth preview experience for design testing
+- Works well for dashboards and desktop apps
 
-4. **Maven or Gradle** - For building the project
-   - Maven: [maven.apache.org](https://maven.apache.org/)
-   - Gradle: [gradle.org](https://gradle.org/)
+---
 
-### Installation Steps
+## Demo
 
-#### Step 1: Clone the Repository
+This section is a place to showcase your app preview.
+
+Add a screenshot, GIF, or screen recording of your JavaFX app here:
+
+```md
+![Theme Hot-Swap Demo](assets/demo.png)
+```
+
+If you want, you can replace the example above with your real screenshot later.
+
+---
+
+## Quick Start
+
+### Requirements
+
+Before running the project, make sure you have:
+
+- Java JDK 17 or higher
+- JavaFX SDK 17 or newer
+- Git
+- An IDE such as IntelliJ IDEA, Eclipse, or VS Code
+- Maven or Gradle if your project uses build automation
+
+### Install
+
+Clone the repository:
 
 ```bash
 git clone https://github.com/mohddilshadkhan2003/theme-hot-swap.git
 cd theme-hot-swap
 ```
 
-#### Step 2: Set Up Your Project
+### Run the Project
 
-**If using Maven:**
+If you are using JavaFX in a project, run it with your IDE or build tool.
 
-Add JavaFX dependency to your `pom.xml`:
+#### Option 1: Run from IDE
 
-```xml
-<dependency>
-    <groupId>org.openjfx</groupId>
-    <artifactId>javafx-controls</artifactId>
-    <version>21.0.1</version>
-</dependency>
-<dependency>
-    <groupId>org.openjfx</groupId>
-    <artifactId>javafx-fxml</artifactId>
-    <version>21.0.1</version>
-</dependency>
-```
+1. Open the project in your IDE.
+2. Make sure JavaFX is configured correctly.
+3. Run the main class that starts the JavaFX application.
 
-**If using Gradle:**
-
-Add to your `build.gradle`:
-
-```gradle
-dependencies {
-    implementation 'org.openjfx:javafx-controls:21.0.1'
-    implementation 'org.openjfx:javafx-fxml:21.0.1'
-}
-```
-
-#### Step 3: Build the Project
-
-**Using Maven:**
+#### Option 2: Run with Maven
 
 ```bash
 mvn clean install
 mvn javafx:run
 ```
 
-**Using Gradle:**
+#### Option 3: Run with Gradle
 
 ```bash
 gradle clean build
 gradle run
 ```
 
-#### Step 4: Run the Application
-
-```bash
-java -jar target/theme-hot-swap.jar
-```
-
-Or run directly from your IDE (IntelliJ IDEA, Eclipse, VS Code, etc.)
+> Note: This repo provides the theme concept and CSS examples. Depending on your setup, you may need to connect it to your own JavaFX application entry point.
 
 ---
 
-## How to Use 💡
+## Example Theme
 
-### Basic Usage
-
-1. **Launch the Application** - Run the project using the commands above
-2. **Open the Theme Dashboard** - Access the live preview dashboard
-3. **Select a Theme** - Choose from available themes or create your own
-4. **Watch It Change** - See your application's theme update instantly
-5. **No Restart Needed** - Keep working without interrupting your workflow
-
-### Creating Your Own Theme
-
-Themes are defined using CSS stylesheets. Here's an example of the default theme colors:
+This project includes a dark green theme inspired by modern dashboard design.
 
 ```css
 .root {
-    -fx-base: #0b1c13;              /* Base color */
-    -fx-background: #07130d;        /* Background */
-    -fx-accent: #3dff8f;            /* Accent (neon green) */
-    -fx-text-base-color: #b9f5cf;   /* Text color */
+    -fx-base: #0b1c13;
+    -fx-background: #07130d;
+    -fx-accent: #3dff8f;
+    -fx-text-base-color: #b9f5cf;
+    -fx-control-inner-background: #0b1c13;
+}
+
+.app-root {
+    -fx-background-color: #07130d;
+    -fx-text-fill: #b9f5cf;
 }
 
 .primary-button {
@@ -128,68 +127,122 @@ Themes are defined using CSS stylesheets. Here's an example of the default theme
 }
 ```
 
-Create your own by modifying these colors and adding to the `src/styles/` directory.
+This example shows how a JavaFX UI can be styled with reusable variables and theme colors.
 
 ---
 
-## Project Structure 📁
+## How It Works
 
-```
+The idea is simple:
+
+1. Your application loads CSS theme files.
+2. The theme defines colors, backgrounds, buttons, text, and layout styling.
+3. You switch or reload the stylesheet dynamically.
+4. The interface updates instantly without restarting the app.
+
+This makes it ideal for testing different looks, dark mode/light mode support, or branding variations.
+
+---
+
+## Project Layout
+
+The repository is intentionally small and focused. At a minimum, you will usually work with:
+
+```text
 theme-hot-swap/
-├── README.md                 # This file
-├── pom.xml / build.gradle    # Project dependencies
-├── src/
-│   ├── main/
-│   │   ├── java/            # JavaFX application code
-│   │   └── resources/       # Images, FXML files, stylesheets
-│   └── test/                # Test files
-└── target/                  # Compiled output (created after building)
+├── README.md
+├── src/                  # Theme files and app source
+├── resources/            # CSS / UI assets (if used in your app)
+├── pom.xml               # Maven config (if used)
+├── build.gradle          # Gradle config (if used)
+└── target/               # Built output
 ```
 
----
-
-## Troubleshooting 🔧
-
-**Issue: "JavaFX not found"**
-- Make sure JavaFX SDK is properly installed and configured in your IDE
-- Add JavaFX modules to your project settings
-
-**Issue: "Application won't start"**
-- Check if Java 11+ is installed: `java -version`
-- Verify all dependencies are downloaded: `mvn install` or `gradle build`
-
-**Issue: "Themes not changing"**
-- Make sure your CSS files are in the correct directory
-- Check the console for error messages
+> The exact folder layout may vary depending on whether this is used inside a larger JavaFX project.
 
 ---
 
-## Contributing 🤝
+## Common Use Cases
 
-Want to improve Theme Hot-Swap? We'd love your help!
+- dark mode switching
+- business dashboard theming
+- branding and custom UI themes
+- desktop app design previews
+- live style prototyping
 
-1. Fork this repository
-2. Create a new branch (`git checkout -b feature/amazing-feature`)
+---
+
+## Customization
+
+To create your own theme:
+
+1. copy an existing CSS file
+2. change the color variables
+3. update button, panel, and text colors
+4. reload the stylesheet in your JavaFX app
+
+Example customization ideas:
+
+- dark mode
+- light mode
+- purple luxury look
+- green cyberpunk look
+- blue enterprise dashboard
+
+---
+
+## Troubleshooting
+
+### JavaFX is not found
+
+Make sure JavaFX is installed and added to your project dependencies or IDE configuration.
+
+### App does not start
+
+Check:
+
+- Java version is 17+
+- JavaFX is included correctly
+- main class is configured properly
+
+### Theme does not apply
+
+Verify that:
+
+- your CSS file path is correct
+- the stylesheet is loaded at app startup
+- CSS class names match your JavaFX controls
+
+---
+
+## Contributing
+
+We welcome improvements, ideas, and new theme packs.
+
+1. Fork the project
+2. Create a feature branch
 3. Make your changes
-4. Commit your changes (`git commit -m 'Add amazing feature'`)
-5. Push to the branch (`git push origin feature/amazing-feature`)
-6. Open a Pull Request
+4. Commit them
+5. Open a pull request
 
 ---
 
-## License 📄
+## License
 
-This project is open source and available under the MIT License.
+This project is open source and available for use in personal and educational projects.
 
----
-
-## Questions or Issues? 💬
-
-If you have any questions or run into problems:
-- Open an [Issue](https://github.com/mohddilshadkhan2003/theme-hot-swap/issues)
-- Check the [Discussions](https://github.com/mohddilshadkhan2003/theme-hot-swap/discussions)
-- Start a [Discussion](https://github.com/mohddilshadkhan2003/theme-hot-swap/discussions)
+If you want to add a formal license later, you can choose MIT or Apache 2.0.
 
 ---
 
-**Happy theming! 🎨**
+## Final Note
+
+Theme Hot-Swap is a simple but powerful idea: make UI design flexible, fast, and flexible enough to update instantly. If you are building a JavaFX application and want a polished theme system, this project is a great starting point.
+
+If you want, I can next turn this into a more premium README with:
+
+- a custom banner image
+- better badge design
+- a real project screenshot section
+- a fully polished "About the project" and "How it works" layout
+- a version specifically styled for GitHub profile presentation
